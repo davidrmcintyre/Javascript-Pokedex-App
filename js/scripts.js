@@ -11,10 +11,13 @@ let pokemonRepository = (function() {
     ];
 
     function add(pokemon) {
+        let expectedKeys = ['name', 'height', 'type'];
+        let objectKeys = Object.keys(pokemon);
         if (typeof pokemon === 'object' &&
-            'name' in pokemon &&
-            'height' in pokemon &&
-            'type' in pokemon) {
+            objectKeys.length === expectedKeys.length &&
+            objectKeys.every(function(key) {
+                return expectedKeys.includes(key);
+            })) {
             pokemonList.push(pokemon);
         } else {
             console.log('Invalid Pokémon object');

@@ -7,6 +7,13 @@ let pokemonList = [{name:'Bulbasaur', height:'0.7', type:['Grass, Poison'] },
                     {name:'Charmeleon', height:'1.1', type:'Fire'},
                     {name:'Charizard', height:'1.7', type:['Fire, Flying']}]
 
+let pokemonList1 = [{name:'Squirtle', height:'0.5', type:'Water'},
+                    {name:'Wartorle', height:'1.0', type:'Water'},
+                    {name:'Blastoise', height:'1.6', type:'Water'},
+                    {name:'Caterpie', height:'0.3', type:'Bug'},
+                    {name:'Metapod', height:'0.7', type:'Bug'},
+                    {name:'Butterfree', height:'1.1', type:['Bug, Flying']}]
+
 //This creates the for loop to display the pokemon in the pages DOM.
 
 /* for (let i = 0; i < pokemonList.length; i++) {
@@ -20,11 +27,15 @@ used this to add a <p> element</p> to the display to help with styling
 used and if loop without the else statement to only dispplay the height related 
 text for a single pokemon. */
 
-for (let i = 0; i < pokemonList.length; i++) {
-    let pokemonText = '<p>' + pokemonList[i].name + ' (height: ' + pokemonList[i].height + ')';
-    if (pokemonList[i].height > 1.8) {
-        pokemonText += ' - wow that is big';
-    }
-    pokemonText += '</p>';
-    document.write(pokemonText);
-}
+//for (let i = 0; i < pokemonList.length; i++) {
+  //  let pokemonText = '<p>' + pokemonList[i].name + ' (height: ' + pokemonList[i].height + ')';
+    //if (pokemonList[i].height > 1.8) {
+      //  pokemonText += ' - wow that is big';
+    //}
+    //pokemonText += '</p>';
+    //document.write(pokemonText);
+//}
+
+pokemonList.forEach(function(pokemon){
+    document.write(pokemon.name + ' is a ' + pokemon.type + ' type pokemon ' + 'and is ' + pokemon.height + ' tall ' + '<br>')
+  })

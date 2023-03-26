@@ -11,7 +11,14 @@ let pokemonRepository = (function() {
     ];
 
     function add(pokemon) {
-        pokemonList.push(pokemon);
+        if (typeof pokemon === 'object' &&
+            'name' in pokemon &&
+            'height' in pokemon &&
+            'type' in pokemon) {
+            pokemonList.push(pokemon);
+        } else {
+            console.log('Invalid Pokémon object');
+        }
     }
 
     function getAll() {

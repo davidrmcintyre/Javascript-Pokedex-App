@@ -28,9 +28,18 @@ let pokemonRepository = (function() {
         return pokemonList;
     }
 
+    function findByName(name) {
+        return pokemonList.filter(function(pokemon) {
+            return pokemon.name === name;
+        });
+    }
+
+    // add a findByType and a findByHeight function later.
+
     return {
         add: add,
-        getAll: getAll
+        getAll: getAll,
+        findByName: findByName
     };
 })();
 

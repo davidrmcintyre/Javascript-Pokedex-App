@@ -1,18 +1,47 @@
 //this is the first JS file I have made.
 
-let pokemonList = [{name:'Bulbasaur', height:'0.7', type:['Grass, Poison'] },
-                    {name:'Ivysaur', height:'1', type: ['Grass, Poison']},
-                    {name:'Venusaur', height:'2', type: ['Grass, Poison']},
-                    {name:'Charmander', height:'0.6', type:'Fire'},
-                    {name:'Charmeleon', height:'1.1', type:'Fire'},
-                    {name:'Charizard', height:'1.7', type:['Fire, Flying']}]
+let pokemonRepository = (function() {
+    let pokemonList = [
+        {name:'Bulbasaur', height:'0.7', type:['Grass', 'Poison']},
+        {name:'Ivysaur', height:'1', type: ['Grass', 'Poison']},
+        {name:'Venusaur', height:'2', type: ['Grass', 'Poison']},
+        {name:'Charmander', height:'0.6', type:'Fire'},
+        {name:'Charmeleon', height:'1.1', type:'Fire'},
+        {name:'Charizard', height:'1.7', type:['Fire', 'Flying']}
+    ];
 
-let pokemonList1 = [{name:'Squirtle', height:'0.5', type:'Water'},
-                    {name:'Wartorle', height:'1.0', type:'Water'},
-                    {name:'Blastoise', height:'1.6', type:'Water'},
-                    {name:'Caterpie', height:'0.3', type:'Bug'},
-                    {name:'Metapod', height:'0.7', type:'Bug'},
-                    {name:'Butterfree', height:'1.1', type:['Bug, Flying']}]
+    function add(pokemon) {
+        pokemonList.push(pokemon);
+    }
+
+    function getAll() {
+        return pokemonList;
+    }
+
+    return {
+        add: add,
+        getAll: getAll
+    };
+})();
+
+let pokemonList1 = [
+    {name:'Squirtle', height:'0.5', type:'Water'},
+    {name:'Wartorle', height:'1.0', type:'Water'},
+    {name:'Blastoise', height:'1.6', type:'Water'},
+    {name:'Caterpie', height:'0.3', type:'Bug'},
+    {name:'Metapod', height:'0.7', type:'Bug'},
+    {name:'Butterfree', height:'1.1', type:['Bug', 'Flying']}
+];
+
+pokemonList1.forEach(function(pokemon) {
+    pokemonRepository.add(pokemon);
+});
+
+pokemonRepository.getAll().forEach(function(pokemon) {
+    document.write('<p>Name: ' + pokemon.name + '</p>');
+    document.write('<p>Height: ' + pokemon.height + '</p>');
+    document.write('<p>Type: ' + pokemon.type + '</p>');
+});
 
 //This creates the for loop to display the pokemon in the pages DOM.
 
@@ -36,6 +65,6 @@ text for a single pokemon. */
     //document.write(pokemonText);
 //}
 
-pokemonList.forEach(function(pokemon){
-    document.write(pokemon.name + ' is a ' + pokemon.type + ' type pokemon ' + 'and is ' + pokemon.height + ' tall ' + '<br>')
-  })
+//pokemonList.forEach(function(pokemon){
+    //document.write(pokemon.name + ' is a ' + pokemon.type + ' type pokemon ' + 'and is ' + pokemon.height + ' tall ' + '<br>')
+  //})

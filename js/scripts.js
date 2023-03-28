@@ -48,6 +48,8 @@ let pokemonRepository = (function() {
         let button = document.createElement('button');
         button.innerText = pokemon.name;
         button.classList.add('my-button');
+
+        addEventListener(button, pokemon);
         
         listItem.appendChild(button);
         ul.appendChild(listItem);
@@ -77,6 +79,10 @@ pokemonList1.forEach(function(pokemon) {
 pokemonRepository.getAll().forEach(function(pokemon) {
     pokemonRepository.addListItem(pokemon);
 });
+
+function showDetails(pokemon) {
+    console.log(pokemon.name + ' is ' + pokemon.height + ' meters tall and is of type ' + pokemon.type.join(', '));
+}
 
 /*pokemonRepository.getAll().forEach(function(pokemon) {
     let ul = document.querySelector('.pokemon-list');

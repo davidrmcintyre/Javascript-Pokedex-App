@@ -36,10 +36,24 @@ let pokemonRepository = (function() {
 
     // add a findByType and a findByHeight function later.
 
+    
+
+    function addListItem(pokemon) {
+        let ul = document.querySelector('.pokemon-list');
+        let listItem = document.createElement('li');
+        let button = document.createElement('button');
+        button.innerText = pokemon.name;
+        button.classList.add('my-button');
+        
+        listItem.appendChild(button);
+        ul.appendChild(listItem);
+    }
+
     return {
         add: add,
         getAll: getAll,
-        findByName: findByName
+        findByName: findByName,
+        addListItem: addListItem
     };
 })();
 
@@ -57,9 +71,17 @@ pokemonList1.forEach(function(pokemon) {
 });
 
 pokemonRepository.getAll().forEach(function(pokemon) {
-    document.write('<p>Name: ' + pokemon.name + '</p>');
-    document.write('<p>Height: ' + pokemon.height + '</p>');
-    document.write('<p>Type: ' + pokemon.type + '</p>');
+    pokemonRepository.addListItem(pokemon);
+});
+
+/*pokemonRepository.getAll().forEach(function(pokemon) {
+    let ul = document.querySelector('.pokemon-list');
+    let listItem = document.createElement('li');
+    let button = document.createElement('button');
+    button.innerText = pokemon.name;
+    button.classList.add('my-button');
+    listItem.appendChild(button);
+    ul.appendChild(listItem);
 });
 
 //This creates the for loop to display the pokemon in the pages DOM.

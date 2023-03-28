@@ -5,8 +5,8 @@ let pokemonRepository = (function() {
         {name:'Bulbasaur', height:'0.7', type:['Grass', 'Poison']},
         {name:'Ivysaur', height:'1', type: ['Grass', 'Poison']},
         {name:'Venusaur', height:'2', type: ['Grass', 'Poison']},
-        {name:'Charmander', height:'0.6', type:'Fire'},
-        {name:'Charmeleon', height:'1.1', type:'Fire'},
+        {name:'Charmander', height:'0.6', type:['Fire']},
+        {name:'Charmeleon', height:'1.1', type:['Fire']},
         {name:'Charizard', height:'1.7', type:['Fire', 'Flying']}
     ];
 
@@ -64,15 +64,30 @@ let pokemonRepository = (function() {
 })();
 
 let pokemonList1 = [
-    {name:'Squirtle', height:'0.5', type:'Water'},
-    {name:'Wartorle', height:'1.0', type:'Water'},
-    {name:'Blastoise', height:'1.6', type:'Water'},
-    {name:'Caterpie', height:'0.3', type:'Bug'},
-    {name:'Metapod', height:'0.7', type:'Bug'},
+    {name:'Squirtle', height:'0.5', type:['Water']},
+    {name:'Wartorle', height:'1.0', type:['Water']},
+    {name:'Blastoise', height:'1.6', type:['Water']},
+    {name:'Caterpie', height:'0.3', type:['Bug']},
+    {name:'Metapod', height:'0.7', type:['Bug']},
     {name:'Butterfree', height:'1.1', type:['Bug', 'Flying']}
 ];
 
 pokemonList1.forEach(function(pokemon) {
+    pokemonRepository.add(pokemon);
+});
+
+// Added 6 more pokemon.
+
+let pokemonList2 = [
+    {name: 'Weedle', height: '0.3', type: ['Bug', 'Poison']},
+    {name: 'Kakuna', height: '0.6', type: ['Bug', 'Poison']},
+    {name: 'Beedrill', height: '1.0', type: ['Bug', 'Poison']},
+    {name: 'Pidgey', height: '0.3', type: ['Flying', 'Normal']},
+    {name: 'Pidgeotto', height: '1.1', type: ['Flying', 'Normal']},
+    {name: 'Pidgeot', height: '1.5', type: ['Flying', 'Normal']},
+];
+
+pokemonList2.forEach(function(pokemon) {
     pokemonRepository.add(pokemon);
 });
 
@@ -84,7 +99,11 @@ function showDetails(pokemon) {
     console.log(pokemon.name + ' is ' + pokemon.height + ' meters tall and is of type ' + pokemon.type.join(', '));
 }
 
-/*pokemonRepository.getAll().forEach(function(pokemon) {
+//when using .join I found that the types must be in an array in order to avoid a console error.
+
+/* This is no longer needed as it is now in the IIFE as the addListItem
+
+pokemonRepository.getAll().forEach(function(pokemon) {
     let ul = document.querySelector('.pokemon-list');
     let listItem = document.createElement('li');
     let button = document.createElement('button');

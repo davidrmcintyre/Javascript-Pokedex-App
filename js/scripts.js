@@ -36,7 +36,11 @@ let pokemonRepository = (function() {
 
     // add a findByType and a findByHeight function later.
 
-    
+    function addEventListener(button, pokemon) {
+        button.addEventListener('click', function() {
+            showDetails(pokemon);
+        });
+    }
 
     function addListItem(pokemon) {
         let ul = document.querySelector('.pokemon-list');

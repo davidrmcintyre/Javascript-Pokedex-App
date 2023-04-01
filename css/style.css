@@ -23,7 +23,7 @@ h1 {
 
 .pokemon-list {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     grid-gap: 1rem;
 }
 
@@ -49,7 +49,7 @@ ul {
 }
 
 
-commented out media queries as I want three columns at all sizes.
+/*commented out media queries as I want three columns at all sizes.
 
 @media (max-width: 768px) {
     .pokemon-list {

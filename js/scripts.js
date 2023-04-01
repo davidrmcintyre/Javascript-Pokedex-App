@@ -1,26 +1,17 @@
 //this is the first JS file I have made.
 
 let pokemonRepository = (function() {
-    let pokemonList = [
-        {name:'Bulbasaur', height:'0.7', type:['Grass', 'Poison']},
-        {name:'Ivysaur', height:'1', type: ['Grass', 'Poison']},
-        {name:'Venusaur', height:'2', type: ['Grass', 'Poison']},
-        {name:'Charmander', height:'0.6', type:['Fire']},
-        {name:'Charmeleon', height:'1.1', type:['Fire']},
-        {name:'Charizard', height:'1.7', type:['Fire', 'Flying']}
-    ];
+    let pokemonList = [];
+    let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=151";
 
     function add(pokemon) {
-        let expectedKeys = ['name', 'height', 'type'];
-        let objectKeys = Object.keys(pokemon);
-        if (typeof pokemon === 'object' &&
-            objectKeys.length === expectedKeys.length &&
-            objectKeys.every(function(key) {
-                return expectedKeys.includes(key);
-            })) {
+        if (
+            typeof pokemon === "object" &&
+            "name" in pokemon 
+        ) {
             pokemonList.push(pokemon);
         } else {
-            console.log('Invalid Pokémon object');
+            console.log("Invalid pokemon object");
         }
     }
 
@@ -36,11 +27,7 @@ let pokemonRepository = (function() {
 
     // add a findByType and a findByHeight function later.
 
-    function addEventListener(button, pokemon) {
-        button.addEventListener('click', function() {
-            showDetails(pokemon);
-        });
-    }
+    
 
     function addListItem(pokemon) {
         let ul = document.querySelector('.pokemon-list');
@@ -48,56 +35,88 @@ let pokemonRepository = (function() {
         let button = document.createElement('button');
         button.innerText = pokemon.name;
         button.classList.add('my-button');
-
-        addEventListener(button, pokemon);
-        
         listItem.appendChild(button);
         ul.appendChild(listItem);
+        button.addEventListener("click", function(event) {
+            showDetails(pokemon);
+        });
     }
+
+    function loadList() {
+        showLoadingMessage();
+        return fetch(apiUrl).then(function (response) {
+          return response.json();
+        }).then(function (json) {
+            hideLoadingMessage();
+          json.results.forEach(function (item) {
+            let pokemon = {
+              name: item.name,
+              detailsUrl: item.url
+            };
+            add(pokemon);
+          });
+        }).catch(function (e) {
+            hideLoadingMessage();
+          console.error(e);
+        })
+      }
+
+      function loadDetails(item) {
+          showLoadingMessage();
+        let url = item.detailsUrl;
+        return fetch(url).then(function (response) {
+          return response.json();
+        }).then(function (details) {
+            hideLoadingMessage();
+          item.imageUrl = details.sprites.front_default;
+          item.height = details.height;
+          item.types = details.types;
+        }).catch(function (e) {
+            hideLoadingMessage();
+          console.error(e);
+        });
+      }
+
+      function showDetails(pokemon) {
+        loadDetails(pokemon).then(function () {
+          console.log(pokemon);
+        });
+      }
+
+      function showLoadingMessage() {
+        let loadingElement = document.createElement('div');
+        loadingElement.classList.add('loading-message');
+        loadingElement.innerText = 'Loading...';
+        document.body.appendChild(loadingElement);
+      }
+    
+      function hideLoadingMessage() {
+        let loadingElement = document.querySelector('.loading-message');
+        if (loadingElement) {
+          loadingElement.remove();
+        }
+      }
 
     return {
         add: add,
         getAll: getAll,
         findByName: findByName,
-        addListItem: addListItem
+        addListItem: addListItem,
+        loadList: loadList,
+        loadDetails: loadDetails,
+        showDetails: showDetails
     };
 })();
 
-let pokemonList1 = [
-    {name:'Squirtle', height:'0.5', type:['Water']},
-    {name:'Wartorle', height:'1.0', type:['Water']},
-    {name:'Blastoise', height:'1.6', type:['Water']},
-    {name:'Caterpie', height:'0.3', type:['Bug']},
-    {name:'Metapod', height:'0.7', type:['Bug']},
-    {name:'Butterfree', height:'1.1', type:['Bug', 'Flying']}
-];
+console.log(pokemonRepository.getAll());
 
-pokemonList1.forEach(function(pokemon) {
-    pokemonRepository.add(pokemon);
-});
+pokemonRepository.loadList().then(function() {
+    pokemonRepository.getAll().forEach(function(pokemon){
+      pokemonRepository.addListItem(pokemon);
+    });
+  });
 
-// Added 6 more pokemon.
 
-let pokemonList2 = [
-    {name: 'Weedle', height: '0.3', type: ['Bug', 'Poison']},
-    {name: 'Kakuna', height: '0.6', type: ['Bug', 'Poison']},
-    {name: 'Beedrill', height: '1.0', type: ['Bug', 'Poison']},
-    {name: 'Pidgey', height: '0.3', type: ['Flying', 'Normal']},
-    {name: 'Pidgeotto', height: '1.1', type: ['Flying', 'Normal']},
-    {name: 'Pidgeot', height: '1.5', type: ['Flying', 'Normal']},
-];
-
-pokemonList2.forEach(function(pokemon) {
-    pokemonRepository.add(pokemon);
-});
-
-pokemonRepository.getAll().forEach(function(pokemon) {
-    pokemonRepository.addListItem(pokemon);
-});
-
-function showDetails(pokemon) {
-    console.log(pokemon.name + ' is ' + pokemon.height + ' meters tall and is of type ' + pokemon.type.join(', '));
-}
 
 //when using .join I found that the types must be in an array in order to avoid a console error.
 

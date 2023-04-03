@@ -77,11 +77,74 @@ let pokemonRepository = (function() {
         });
       }
 
-      function showDetails(pokemon) {
+    let modalContainer = document.querySelector("#modal-container");
+  
+
+    let currentPokemonIndex;
+
+    function showDetails(pokemon) {
         loadDetails(pokemon).then(function () {
-          console.log(pokemon);
+          let modalCloseButton = document.querySelector(".modal-close");
+          let imageContainer = document.querySelector("#image-container");
+          let pokemonImage = document.createElement("img");
+          pokemonImage.classList.add('pokemon-image')
+          let modalTitle = document.querySelector("#modal-title");
+          let modalText = document.querySelector("#modal-text");
+          modalContainer.classList.add("is-visible");
+          modalCloseButton.addEventListener("click", closeModal);
+          modalTitle.innerText = pokemon.name;
+          let typeNames = pokemon.types.map(typeObj => typeObj.type.name);
+          modalText.innerText = "Height: " + pokemon.height + " " + "Type: " + typeNames.join(", ");
+          pokemonImage.src = pokemon.imageUrl;
+          imageContainer.innerHTML= '';
+          imageContainer.appendChild(pokemonImage);
+    
+          modalContainer.addEventListener("click", (e) => {
+            let target = e.target;
+            if (target === modalContainer) {
+              closeModal();
+            }
+          });
+    
+          window.addEventListener("keydown", (e) => {
+            if (
+              e.key === "Escape" &&
+              modalContainer.classList.contains("is-visible")
+            ) {
+              closeModal();
+            }
+          });
+    
+          // Add swipe functionality
+          let startX;
+          modalContainer.addEventListener('touchstart', function(e) {
+              startX = e.touches[0].clientX;
+          }, false);
+    
+          modalContainer.addEventListener('touchmove', function(e) {
+              e.preventDefault();
+          }, false);
+    
+          modalContainer.addEventListener('touchend', function(e) {
+              let endX = e.changedTouches[0].clientX;
+              let diffX = startX - endX;
+              if (diffX > 100) { // adjust this value as needed
+                  // swipe left
+                  showNextPokemon();
+              } else if (diffX < -100) { // adjust this value as needed
+                  // swipe right
+                  showPreviousPokemon();
+              }
+          }, false);
+    
+          currentPokemonIndex = pokemonList.findIndex(p => p.name === pokemon.name);
         });
       }
+
+  function closeModal() {
+    let modalContainer = document.querySelector("#modal-container");
+    modalContainer.classList.remove("is-visible");
+  }
 
       function showLoadingMessage() {
         let loadingElement = document.createElement('div');

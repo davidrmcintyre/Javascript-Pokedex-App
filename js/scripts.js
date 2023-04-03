@@ -3,6 +3,7 @@
 let pokemonRepository = (function() {
     let pokemonList = [];
     let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=151";
+    let currentPokemonIndex;
 
     function add(pokemon) {
         if (
@@ -78,10 +79,6 @@ let pokemonRepository = (function() {
       }
 
     let modalContainer = document.querySelector("#modal-container");
-  
-
-    let currentPokemonIndex;
-
     function showDetails(pokemon) {
         loadDetails(pokemon).then(function () {
           let modalCloseButton = document.querySelector(".modal-close");
@@ -128,10 +125,10 @@ let pokemonRepository = (function() {
           modalContainer.addEventListener('touchend', function(e) {
               let endX = e.changedTouches[0].clientX;
               let diffX = startX - endX;
-              if (diffX > 100) { // adjust this value as needed
+              if (diffX > 40) { // adjust this value as needed
                   // swipe left
                   showNextPokemon();
-              } else if (diffX < -100) { // adjust this value as needed
+              } else if (diffX < -40) { // adjust this value as needed
                   // swipe right
                   showPreviousPokemon();
               }
@@ -141,10 +138,24 @@ let pokemonRepository = (function() {
         });
       }
 
-  function closeModal() {
-    let modalContainer = document.querySelector("#modal-container");
-    modalContainer.classList.remove("is-visible");
-  }
+      function showNextPokemon() {
+        if (currentPokemonIndex < pokemonList.length - 1) {
+            let nextPokemon = pokemonList[currentPokemonIndex + 1];
+            showDetails(nextPokemon);
+        }
+    }
+
+    function showPreviousPokemon() {
+        if (currentPokemonIndex > 0) {
+            let previousPokemon = pokemonList[currentPokemonIndex - 1];
+            showDetails(previousPokemon);
+        }
+    }
+
+      function closeModal() {
+        let modalContainer = document.querySelector("#modal-container");
+        modalContainer.classList.remove("is-visible");
+      }
 
       function showLoadingMessage() {
         let loadingElement = document.createElement('div');
@@ -160,7 +171,7 @@ let pokemonRepository = (function() {
         }
       }
 
-    return {
+      return {
         add: add,
         getAll: getAll,
         findByName: findByName,
@@ -168,7 +179,7 @@ let pokemonRepository = (function() {
         loadList: loadList,
         loadDetails: loadDetails,
         showDetails: showDetails
-    };
+      };
 })();
 
 console.log(pokemonRepository.getAll());

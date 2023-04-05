@@ -158,6 +158,25 @@ ul {
   }
 
 
+  @media all and (max-width: 900px) {
+    .pokemon-list {
+      grid-gap: 0.5rem;
+    }
+  }
+  
+  @media all and (max-width: 750px) {
+    .pokemon-list {
+      grid-gap: 0.3rem;
+    }
+  }
+  
+  @media all and (max-width: 400px) {
+    .pokemon-list {
+      grid-gap: 0.1rem;
+    }
+  }
+  
+
 /*@media all and (max-width: 900px) {
     .pokemon-list {
       display: grid;

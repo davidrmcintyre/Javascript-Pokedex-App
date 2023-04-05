@@ -23,6 +23,8 @@ body {
 
 h1 {
     text-align: left;
+    display: inline-block;
+    padding-right: 2rem;
 }
 
 .pokedex {
@@ -63,6 +65,7 @@ ul {
 
 .search-bar {
   padding-top: 20px;
+  display: inline-block;
 }
 
 .search-box {

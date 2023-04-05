@@ -30,9 +30,8 @@ body {
 }
 
 h1 {
-    text-align: center;
     padding-right: 2rem;
-    color: yellow;
+    color: #ffff00;
     text-shadow: 2px 2px 2px #000;
 }
 
@@ -75,18 +74,20 @@ ul {
 }
 
 .search-bar {
-  font-family: 'Raleway';
-  color: yellow;
+  color: #ffff00;
   text-shadow: 2px 2px 2px #000;
-  font-size: 28px;
+  font-weight: 400;
+  font-size: xx-large;
 }
 
 .search-box {
+
   border: none;
   outline: none;
   font-size: 16px;
   border-radius: 20px;
   box-shadow: 1.5px 1.5px 1.5px #000;
+  border: 1px solid #000;
 }
 
 #modal-container {
@@ -118,12 +119,13 @@ ul {
     margin: auto;
     display: inline-block;
     box-sizing: border-box;
-    background: #fff;
+    background: radial-gradient(circle, rgba(255,255,255,1) 50%, rgba(255,0,0,1) 100%);
     background-size: cover;
     padding: 15px;
     width: 100%;
     max-width: 700px;
     text-align: left;
+    border-radius: 40px;
   }
   
   .modal-close {
@@ -134,14 +136,30 @@ ul {
     background: none;
     height: 50px;
     width: 50px;
+    cursor: pointer;
+    font-family: 'Raleway', sans-serif;
   }
   
   .modal h1 {
     margin-top: 0;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    text-shadow: 2px 2px 2px #000;
+    text-align: center;
+  }
+  .modal h1::first-letter {
+    text-transform: uppercase;
   }
   
   .modal p {
     margin-bottom: 0;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    text-align: center;
+  }
+
+  #image-container {
+    text-align: center;
   }
   
 

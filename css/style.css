@@ -42,7 +42,7 @@ h1 {
 
 .pokemon-list {
   display: grid;
-  grid-template-columns: repeat(3, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 1rem;
   justify-content: center;
   justify-items: center;
@@ -118,7 +118,7 @@ ul {
     margin: auto;
     display: inline-block;
     box-sizing: border-box;
-    background-image: radial-gradient(circle at center, #000 20%, #fff 20%, #fff 80%, #f00 85%);
+    background-image: radial-gradient(circle at center, #dbdbdb 20%, #fff 20%, #fff 80%, #f00 85%);
     background-size: cover;
     padding: 15px;
     width: 100%;
@@ -158,21 +158,15 @@ ul {
   }
 
 
-  @media all and (max-width: 900px) {
+  @media screen and (min-width: 400px) {
     .pokemon-list {
-      grid-gap: 0.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 2fr));
     }
   }
   
-  @media all and (max-width: 750px) {
+  @media screen and (min-width: 750px) {
     .pokemon-list {
-      grid-gap: 0.3rem;
-    }
-  }
-  
-  @media all and (max-width: 400px) {
-    .pokemon-list {
-      grid-gap: 0.1rem;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 3fr));
     }
   }
   

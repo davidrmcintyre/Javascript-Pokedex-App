@@ -118,7 +118,7 @@ ul {
     margin: auto;
     display: inline-block;
     box-sizing: border-box;
-    background-image: radial-gradient(circle at center, #dbdbdb 20%, #fff 20%, #fff 80%, #f00 85%);
+    background: #fff;
     background-size: cover;
     padding: 15px;
     width: 100%;

@@ -9,6 +9,11 @@
     <title>Simple JS App</title>
   </head>
   <body>
+   <div class="pokeball-background">
+    <div class="search-bar">
+      <label for="search">Search:</label>
+      <input class="search-box" type="text" id="search" name="search">
+    </div>
   <div class="pokedex">
     <h1>Pokédex</h1>
     <ul class="pokemon-list"></ul>
@@ -21,6 +26,7 @@
       <div id="image-container"></div>
     </div>
   </div>
+   </div>
 
   <!-- the script for the polyfill must go above the script for my custom JS-->
   <script src="js/promise-polyfill.js"></script>

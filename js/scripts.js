@@ -44,23 +44,25 @@ let pokemonRepository = (function() {
     }
 
     function loadList() {
-        showLoadingMessage();
-        return fetch(apiUrl).then(function (response) {
-          return response.json();
-        }).then(function (json) {
-            hideLoadingMessage();
-          json.results.forEach(function (item) {
-            let pokemon = {
-              name: item.name,
-              detailsUrl: item.url
-            };
-            add(pokemon);
-          });
-        }).catch(function (e) {
-            hideLoadingMessage();
-          console.error(e);
-        })
-      }
+      showLoadingMessage();
+      return fetch(apiUrl).then(function (response) {
+        return response.json();
+      }).then(function (json) {
+        hideLoadingMessage();
+        json.results.forEach(function (item) {
+          let pokemon = {
+            name: item.name,
+            detailsUrl: item.url
+          };
+          pokemonRepository.add(pokemon);
+        });
+        renderPokemonList(pokemonRepository.getAll());
+      }).catch(function (e) {
+        hideLoadingMessage();
+        console.error(e);
+      })
+    }
+    
 
       function loadDetails(item) {
           showLoadingMessage();
@@ -171,6 +173,25 @@ let pokemonRepository = (function() {
         }
       }
 
+      let searchInput = document.querySelector('#search');
+searchInput.addEventListener('input', function() {
+  let searchTerm = searchInput.value.toLowerCase();
+  let pokemonList = pokemonRepository.getAll();
+  let filteredList = pokemonList.filter(function(pokemon) {
+    return pokemon.name.toLowerCase().includes(searchTerm);
+  });
+  renderPokemonList(filteredList);
+});
+
+function renderPokemonList(pokemonList) {
+  let ul = document.querySelector('.pokemon-list');
+  ul.innerHTML = '';
+  pokemonList.forEach(function(pokemon) {
+    pokemonRepository.addListItem(pokemon);
+  });
+}
+
+
       return {
         add: add,
         getAll: getAll,
@@ -189,45 +210,3 @@ pokemonRepository.loadList().then(function() {
       pokemonRepository.addListItem(pokemon);
     });
   });
-
-
-
-//when using .join I found that the types must be in an array in order to avoid a console error.
-
-/* This is no longer needed as it is now in the IIFE as the addListItem
-
-pokemonRepository.getAll().forEach(function(pokemon) {
-    let ul = document.querySelector('.pokemon-list');
-    let listItem = document.createElement('li');
-    let button = document.createElement('button');
-    button.innerText = pokemon.name;
-    button.classList.add('my-button');
-    listItem.appendChild(button);
-    ul.appendChild(listItem);
-});
-
-//This creates the for loop to display the pokemon in the pages DOM.
-
-/* for (let i = 0; i < pokemonList.length; i++) {
-document.write(pokemonList[i].name + " (height: " + pokemonList[i].height + ")<br>");
-} */
-
-// Commented out the original loop
-
-/* Created a new variable for the text that will be displayed "let pokemonText" and 
-used this to add a <p> element</p> to the display to help with styling
-used and if loop without the else statement to only dispplay the height related 
-text for a single pokemon. */
-
-//for (let i = 0; i < pokemonList.length; i++) {
-  //  let pokemonText = '<p>' + pokemonList[i].name + ' (height: ' + pokemonList[i].height + ')';
-    //if (pokemonList[i].height > 1.8) {
-      //  pokemonText += ' - wow that is big';
-    //}
-    //pokemonText += '</p>';
-    //document.write(pokemonText);
-//}
-
-//pokemonList.forEach(function(pokemon){
-    //document.write(pokemon.name + ' is a ' + pokemon.type + ' type pokemon ' + 'and is ' + pokemon.height + ' tall ' + '<br>')
-  //})

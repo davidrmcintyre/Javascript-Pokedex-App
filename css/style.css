@@ -21,9 +21,14 @@ body {
   z-index: -1;
 }
 
+.h1search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 h1 {
-    text-align: left;
-    display: inline-block;
+    text-align: center;
     padding-right: 2rem;
 }
 
@@ -65,7 +70,6 @@ ul {
 
 .search-bar {
   padding-top: 20px;
-  display: inline-block;
 }
 
 .search-box {
@@ -130,6 +134,19 @@ ul {
     margin-bottom: 0;
   }
   
+
+  @media (max-width: 600px) {
+    .h1search {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .search-bar {
+      margin-top: 10px;
+      margin-left: 0;
+    }
+  }
+
 
 @media all and (max-width: 900px) {
     .pokemon-list {

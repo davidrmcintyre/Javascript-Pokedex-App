@@ -179,6 +179,11 @@ main {
         text-align: center;
     }
 
+    .abilities-section {
+      flex-direction: column;
+      font-size: 10px;
+    }
+
 }
 
 /*------------- STYLE FOR THE MODAL-------------*/

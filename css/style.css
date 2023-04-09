@@ -256,7 +256,6 @@ main {
   
 .pokemon-image{
     width: 60%;
-    max-height: fit-content;
 }
 
 /*---Name, type, abilities ----*/

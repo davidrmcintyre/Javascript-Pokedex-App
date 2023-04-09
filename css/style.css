@@ -243,7 +243,7 @@ main {
 }
   
 .pokemon-image{
-    width: 60%;
+    max-width: 60%;
 }
 
 /*---Name, type, abilities ----*/

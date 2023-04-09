@@ -182,7 +182,6 @@ main {
     display: none;
     background: transparent;
     color: #000;
-    overflow-y: auto;
 }
 
 .modal-content, .modal-header, .modal-body {

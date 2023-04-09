@@ -182,15 +182,9 @@ main {
       font-size: 10px;
     }
 
-    .image-panel, .panel, .data-panel, .name-section, .types-section, .abilities-section{
-     max-width: 90%;
-    
-  }
-
-  .modal-body {
-    overflow-y: auto;
-    padding-bottom: 20px;
-  }
+    .modal-dialog {
+      max-height: calc(100vh - 60px);
+    }
 
 }
 

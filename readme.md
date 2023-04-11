@@ -25,7 +25,7 @@ jQuery, Bootstrap
 
 How the display will look on a desktop.
 
-![Desktop Interface](Desktop-interface.png)
+![Desktop Interface](/Desktop-interface.png)
 
 
 

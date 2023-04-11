@@ -145,10 +145,10 @@ let pokemonRepository = (function () {
       modalContainer.addEventListener('touchend', function(e) {
         let endX = e.changedTouches[0].clientX;
         let diffX = startX - endX;
-        if (diffX > 40) { // adjust this value after testing if needed
+        if (diffX > 80) { // adjust this value after testing if needed
           // swipe left
           showNextPokemon();
-        } else if (diffX < -40) { // adjust this value as after testing if needed
+        } else if (diffX < -80) { // adjust this value as after testing if needed
           // swipe right
           showPreviousPokemon();
         }

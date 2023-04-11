@@ -157,12 +157,16 @@ main {
         padding: 20px;
     }
 
+    .abilities-section {
+      font-size: 12px;
+    }
+
 }
 
 @media all and (max-width:418px) {
 
     main {
-        padding-top: 120px;
+        padding-top: 100px;
     }
 
     .navbar {
@@ -172,6 +176,14 @@ main {
 
     .pokemon-search::placeholder {
         text-align: center;
+    }
+
+    .abilities-section {
+      font-size: 10px;
+    }
+
+    .modal-dialog {
+      max-height: calc(100vh - 60px);
     }
 
 }

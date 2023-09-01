@@ -216,7 +216,7 @@ main {
     border-radius: 0 40px 40px 0;
 }
 
-.panel, .light, .screen-frame, .window {
+.panel, .screen-frame, .window {
     border: 5px solid #000;
 
 }
@@ -255,7 +255,8 @@ main {
 }
   
 .pokemon-image{
-    width: 60%;
+    max-width: 60%;
+    max-height: fit-content;
 }
 
 /*---Name, type, abilities ----*/
